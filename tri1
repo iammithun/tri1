@@ -1,0 +1,54 @@
+import turtle
+import math
+
+# Function to draw a triangle
+def draw_triangle(t, side_a, side_b, side_c):
+    t.forward(side_a)
+    t.left(180 - math.degrees(math.acos((side_b**2 + side_c**2 - side_a**2) / (2 * side_b * side_c))))
+    t.forward(side_b)
+    t.left(180 - math.degrees(math.acos((side_c**2 + side_a**2 - side_b**2) / (2 * side_c * side_a))))
+    t.forward(side_c)
+
+# Function to calculate area of a triangle using Heron's formula
+def calculate_area(side_a, side_b, side_c):
+    s = (side_a + side_b + side_c) / 2
+    return math.sqrt(s * (s - side_a) * (s - side_b) * (s - side_c))
+
+# Initialize turtle
+t = turtle.Turtle()
+t.speed(1)
+
+# Define triangle sides
+side_a = 100
+side_b = 80
+side_c = 60
+
+# Draw the triangle
+draw_triangle(t, side_a, side_b, side_c)
+
+# Calculate the area using Heron's formula
+area = calculate_area(side_a, side_b, side_c)
+
+# Write the question
+t.penup()
+t.goto(-50, -20)
+t.pendown()
+t.write("Calculate the area of the triangle:", font=("Arial", 12, "normal"))
+
+# Write the dimensions
+t.penup()
+t.goto(-50, -40)
+t.pendown()
+t.write("Side a = {} units, Side b = {} units, Side c = {} units".format(side_a, side_b, side_c), font=("Arial", 12, "normal"))
+
+# Write the answer
+t.penup()
+t.goto(-50, -60)
+t.pendown()
+t.write("Area = {:.2f} square units".format(area), font=("Arial", 12, "normal"))
+
+# Hide turtle
+t.hideturtle()
+
+# Keep the window open
+turtle.done()
